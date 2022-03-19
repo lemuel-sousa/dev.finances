@@ -9,9 +9,25 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 93.75%;
+}
+
 body {
     background-color: #f0f2f5;
     font-family: 'Poppins', sans-serif;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 .container {
@@ -28,6 +44,20 @@ h2 {
     font-weight: normal;
 }
 
+/* Linkes & Buttons ------------------------------*/
+a{
+    color: #49AA26;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #3dd705;
+}
+
+.button.new {
+    display: inline-block;
+    margin-bottom: .8rem;
+}
 
 /* Header ----------------------------------------*/
 header {
@@ -65,6 +95,10 @@ header {
 }
 
 .card h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     font-weight: normal;
     font-size: 1rem;
 }
@@ -83,14 +117,22 @@ header {
 
 /* Table ----------------------------------------*/
 #data-transactions {
+    display: block;
     width: 100%;
     border-spacing: 0 0.5rem;
     color: #969cb3;
+
+    overflow-x: auto;
 }
 
 table thead tr th:first-child,
 table tbody tr td:first-child {
     border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead tr th:last-child,
+table tbody tr td:last-child {
+    border-radius: 0 0.25rem 0.25rem 0;
 }
 
 table th{
@@ -125,6 +167,7 @@ td.income {
 td.expense {
     color: #e92929;
 }
+
 /* Footer -----------------------------------------*/
 footer {
     text-align: center;
@@ -132,4 +175,20 @@ footer {
 
     color: var(--clolor-dark-blue);
     opacity: 0.7;
+}
+
+/* Responsive -------------------------------*/
+@media (min-width: 800px) {
+    html {
+        font-size: 87.5%;
+    }
+
+    #balance {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        
+    }
+
+
 }
