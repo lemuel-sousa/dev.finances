@@ -1,6 +1,9 @@
 /* Global ----------------------------------------*/
 :root {
-    --clolor-dark-blue: #363F5F;
+    --color-dark-blue: #363F5F;
+    --color-green: #49AA26;
+    --color-light-green: #3dd705;
+    --color-red: #e92929;
 }
 
 * {
@@ -39,24 +42,60 @@ body {
 h2 {
     margin-top: 3.2rem;
     margin-bottom: 0.8rem;
-    color: var(--clolor-dark-blue);
+    color: var(--color-dark-blue);
 
     font-weight: normal;
 }
 
 /* Linkes & Buttons ------------------------------*/
-a{
-    color: #49AA26;
+a {
+    color: var(--color-green);
     text-decoration: none;
 }
 
-a:hover{
-    color: #3dd705;
+a:hover {
+    color: var(--color-light-green);
+}
+
+button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+
+    color: white;
+    background: var(--color-green);
+
+    padding: 0;
+
+    border-radius: 0.25rem;
+
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--color-light-green);
 }
 
 .button.new {
     display: inline-block;
-    margin-bottom: .8rem;
+    margin-bottom: 0.8rem;
+}
+
+.button.cancel {
+    color: var(--color-red);
+    border: 2px var(--color-red) solid;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0.6;
+}
+
+.button.cancel:hover {
+    opacity: 1;
 }
 
 /* Header ----------------------------------------*/
@@ -91,7 +130,7 @@ header {
 
     margin-bottom: 2rem;
 
-    color: var(--clolor-dark-blue);
+    color: var(--color-dark-blue);
 }
 
 .card h3 {
@@ -103,7 +142,7 @@ header {
     font-size: 1rem;
 }
 
-.card p{
+.card p {
     font-size: 2rem;
     line-height: 3rem;
 
@@ -111,18 +150,22 @@ header {
 }
 
 .card.total {
-    background-color: #49AA26;
+    background-color: var(--color-green);
     color: #fff;
 }
 
 /* Table ----------------------------------------*/
-#data-transactions {
+#transactions {
     display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+#data-transactions {
     width: 100%;
     border-spacing: 0 0.5rem;
     color: #969cb3;
 
-    overflow-x: auto;
 }
 
 table thead tr th:first-child,
@@ -135,13 +178,14 @@ table tbody tr td:last-child {
     border-radius: 0 0.25rem 0.25rem 0;
 }
 
-table th{
+table th {
     background-color: #fff;
 
     padding: 1rem 2rem;
 
     font-weight: normal;
-    text-align: left;}
+    text-align: left;
+}
 
 table tbody tr {
     opacity: 0.7;
@@ -151,13 +195,13 @@ table tbody tr:hover {
     opacity: 1;
 }
 
-table tbody td{
+table tbody td {
     background-color: #fff;
     padding: 1rem 2rem;
 }
 
 td.description {
-    color: var(--clolor-dark-blue);
+    color: var(--color-dark-blue);
 }
 
 td.income {
@@ -168,12 +212,76 @@ td.expense {
     color: #e92929;
 }
 
+/* Modal -----------------------------------------*/
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: #f0f2f5;
+    padding: 2.4rem;
+}
+
+/* Form -----------------------------------------*/
+#form {
+    max-width: 500px;
+}
+
+#form h2 {
+    margin-top: 0;   
+}
+
+input {
+    border: none;
+    border-radius: 0.2rem;
+
+    padding: 0.8rem;
+    width: 100%;
+}
+
+.input-group {
+    margin-top: 0.8rem;
+}
+
+.input-group small {
+    opacity: 0.4;
+}
+
+.input-group.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group.actions .button,
+.input-group.actions button {
+    width: 48%;
+}
+
 /* Footer -----------------------------------------*/
 footer {
     text-align: center;
     padding: 4rem 0 2rem;
 
-    color: var(--clolor-dark-blue);
+    color: var(--color-dark-blue);
     opacity: 0.7;
 }
 
@@ -187,7 +295,7 @@ footer {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 2rem;
-        
+
     }
 
 
