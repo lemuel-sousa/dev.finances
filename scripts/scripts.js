@@ -16,34 +16,21 @@ const Modal = {
     }
 }
 
-const Transaction = {
-    all: [
-        {
-            description: 'Luz',
-            amount: -50000,
-            date: '23/01/2022',
-        },
-        {
-            description: 'Criação Web Site',
-            amount: 500000,
-            date: '23/01/2022',
-        },
-        {
-            description: 'Internet',
-            amount: -20000,
-            date: '23/01/2022',
-        },
-        {
-            description: 'App',
-            amount: 20000,
-            date: '23/01/2022',
-        },
-        {
-            description: 'Mentoria',
-            amount: 80000,
-            date: '23/01/2022',
-        }],
+const Storage = {
+    get() {
+        let transactions = localStorage.getItem("dev.finances:transactions")
+        console.log(transactions);
+        return JSON.parse(transactions) || []
+    },
 
+    set(transactions) {
+        localStorage.setItem("dev.finances:transactions", JSON.stringify(transactions))
+    }
+}
+
+const Transaction = {
+    all: Storage.get(),
+    
     add(transaction) {
         Transaction.all.push(transaction)
 
@@ -111,7 +98,7 @@ const DOM = {
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
-                <img onclick="Transaction.remove${(index)}" src="./assets/minus.svg" alt="Remover transação">
+                <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação">
             </td>
         `
         return html
@@ -141,7 +128,7 @@ const Utils = {
         return value
     },
 
-    formatDate(date){
+    formatDate(date) {
         splitDate = date.split("-")
 
         return `${splitDate[2]}/${splitDate[1]}/${splitDate[0]}`
@@ -177,18 +164,16 @@ const Form = {
         }
     },
 
-
-    
     validateFields() {
-        const { description, amount, date} = Form.getValues()
+        const { description, amount, date } = Form.getValues()
 
         if (description.trim() === "" || amount.trim() === "" || date.trim() === "") {
             throw new Error("Por favor, preencha todos os campos")
         }
     },
-    
+
     formatedValues() {
-        let { description, amount, date} = Form.getValues()
+        let { description, amount, date } = Form.getValues()
 
         amount = Utils.formatAmount(amount)
 
@@ -210,7 +195,7 @@ const Form = {
 
     submit(event) {
         event.preventDefault()
-        
+
         try {
             // Verificar todas informações preenchidas
             Form.validateFields()
@@ -222,16 +207,17 @@ const Form = {
             Form.clearFields()
             // Fechar Modal
             Modal.close()
-           
+
         } catch (error) {
-             alert(error.message)
+            alert(error.message)
         }
 
 
 
-        
+
     }
 }
+
 
 const App = {
     init() {
@@ -241,6 +227,8 @@ const App = {
         })
 
         DOM.updateBalance()
+
+        Storage.set(Transaction.all)
     },
 
     reload() {
