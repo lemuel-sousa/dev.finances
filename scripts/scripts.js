@@ -4,7 +4,8 @@ const Modal = {
         // Adicionar a class active no modal
         document
             .querySelector('.modal-overlay')
-            .classList.add('active')
+            .classList
+            .add('active')
     },
 
     close() {
@@ -12,15 +13,14 @@ const Modal = {
         // Remover a class active no modal
         document
             .querySelector('.modal-overlay')
-            .classList.remove('active')
+            .classList
+            .remove('active')
     }
 }
 
 const Storage = {
     get() {
-        let transactions = localStorage.getItem("dev.finances:transactions")
-        console.log(transactions);
-        return JSON.parse(transactions) || []
+        return JSON.parse(localStorage.getItem("dev.finances:transactions")) || []
     },
 
     set(transactions) {
@@ -30,7 +30,7 @@ const Storage = {
 
 const Transaction = {
     all: Storage.get(),
-    
+
     add(transaction) {
         Transaction.all.push(transaction)
 
@@ -211,9 +211,6 @@ const Form = {
         } catch (error) {
             alert(error.message)
         }
-
-
-
 
     }
 }
